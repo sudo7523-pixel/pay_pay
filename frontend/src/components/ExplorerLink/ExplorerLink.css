@@ -1,0 +1,19 @@
+.explorer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: var(--weight-medium);
+  transition: opacity var(--transition-fast);
+}
+
+.explorer-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.explorer-link svg {
+  flex-shrink: 0;
+}
