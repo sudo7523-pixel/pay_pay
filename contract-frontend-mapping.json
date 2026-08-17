@@ -1,0 +1,93 @@
+{
+  "description": "Maps Soroban smart contract functions to their frontend service and hook consumers",
+  "contract": "contract/src/contract.rs",
+  "backend_integration": "backend/src/blockchain/contract.service.js",
+  "frontend_service": "frontend/src/services/sorobanService.js",
+  "frontend_hook": "frontend/src/hooks/useSoroban.js",
+  "mappings": [
+    {
+      "contract_function": "initialize",
+      "backend_function": "invokeContract('initialize', ...)",
+      "frontend_consumer": "sorobanController (backend admin route)",
+      "purpose": "Initialize contract with admin, fee, tokens"
+    },
+    {
+      "contract_function": "pay",
+      "backend_function": "invokeContract('pay', ...) via pay route",
+      "frontend_service": "createIntent() → POST /soroban/intent",
+      "frontend_hook_consumer": "useSoroban.sendPayment()",
+      "purpose": "Create payment intent and submit transaction"
+    },
+    {
+      "contract_function": "get_payment",
+      "backend_function": "getPayment(paymentId)",
+      "frontend_service": "getPayment(paymentId) → GET /soroban/payment/:id",
+      "frontend_hook_consumer": "useSoroban (polling & status check)",
+      "purpose": "Retrieve payment details by ID"
+    },
+    {
+      "contract_function": "payment_exists",
+      "backend_function": "paymentExists(paymentId)",
+      "frontend_service": "paymentExists(paymentId) → GET /soroban/payment/exists/:id",
+      "frontend_consumer": "Transaction verification flow",
+      "purpose": "Check if a payment record exists"
+    },
+    {
+      "contract_function": "merchant_total",
+      "backend_function": "merchantTotal(address)",
+      "frontend_service": "getMerchantTotal(address) → GET /soroban/merchant-total/:address",
+      "frontend_hook_consumer": "useMerchant",
+      "purpose": "Get total payments received by merchant"
+    },
+    {
+      "contract_function": "customer_total",
+      "backend_function": "customerTotal(address)",
+      "frontend_service": "getCustomerTotal(address) → GET /soroban/customer-total/:address",
+      "frontend_hook_consumer": "useCustomer",
+      "purpose": "Get total payments made by customer"
+    },
+    {
+      "contract_function": "get_config",
+      "backend_function": "getConfig()",
+      "frontend_service": "getConfig() → GET /soroban/config",
+      "frontend_hook_consumer": "BlockchainContext / useSoroban",
+      "purpose": "Retrieve contract configuration"
+    },
+    {
+      "contract_function": "upgrade",
+      "backend_function": "invokeContract('upgrade', ...) via admin route",
+      "frontend_consumer": "Admin dashboard (admin only)",
+      "purpose": "Upgrade contract WASM"
+    },
+    {
+      "contract_function": "set_paused",
+      "backend_function": "invokeContract('set_paused', ...) via admin route",
+      "frontend_consumer": "Admin dashboard (admin only)",
+      "purpose": "Pause/unpause contract operations"
+    },
+    {
+      "contract_function": "set_fee",
+      "backend_function": "invokeContract('set_fee', ...) via admin route",
+      "frontend_consumer": "Admin dashboard (admin only)",
+      "purpose": "Update contract fee basis points"
+    },
+    {
+      "contract_function": "set_admin",
+      "backend_function": "invokeContract('set_admin', ...) via admin route",
+      "frontend_consumer": "Admin dashboard (admin only)",
+      "purpose": "Transfer contract admin role"
+    },
+    {
+      "contract_function": "add_supported_token",
+      "backend_function": "invokeContract('add_supported_token', ...) via admin route",
+      "frontend_consumer": "Admin dashboard (admin only)",
+      "purpose": "Add a supported token to contract"
+    },
+    {
+      "contract_function": "remove_supported_token",
+      "backend_function": "invokeContract('remove_supported_token', ...) via admin route",
+      "frontend_consumer": "Admin dashboard (admin only)",
+      "purpose": "Remove a supported token from contract"
+    }
+  ]
+}
