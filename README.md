@@ -2,6 +2,69 @@
 
 ## Description
 Paystream is a non-custodial payment platform that enables users to send, receive, and accept cryptocurrency payments with near-zero fees and instant settlement. Built on the Stellar network, it leverages Soroban smart contracts for trustless payment settlement while maintaining a familiar web experience.
+## Key Features
+
+### Customer Features
+- Send payments to merchants via QR code scanning
+- Pay with the Freighter browser extension (non-custodial)
+- View transaction history and receipts
+- Track payment status with blockchain verification
+
+### Merchant Features
+- Merchant registration with auto-generated merchant codes (CP100001 format)
+- Business profile management (name, description, category, contact details)
+- QR code generation for payment discovery (PNG/SVG download)
+- Sales analytics dashboard (total customers, repeat rate, top customers)
+- Transaction history with search, filter, pagination, and sorting
+- Wallet linking and verification against the Stellar network
+
+### Blockchain Features
+- Soroban smart contract for trustless payment settlement
+- Atomic payments with built-in fee deduction (basis points)
+- Deterministic payment IDs via SHA-256 for idempotency
+- Nonce-based replay protection
+- Token whitelist for supported assets
+- Contract pause/unpause (emergency stop)
+- Contract upgrade mechanism
+- On-chain event emission (`PaymentCompleted`, `ConfigUpdated`, `ContractUpgraded`)
+- Background event sync service for off-chain confirmation
+- Payment existence and status queries directly from the contract
+- Merchant/customer payment counters stored on-chain
+
+### Security Features
+- JWT-based authentication with 7-day token expiry
+- Password hashing with bcrypt (12 salt rounds)
+- Express-validator for input validation and sanitization
+- Helmet for secure HTTP headers
+- CORS with configurable origins
+- Role-based access control (user, merchant, admin)
+- Stellar public key validation on wallet linking
+- Wallet verification against the live Stellar network
+- Soroban authorization framework (cascading auth for token transfers)
+- Contract-level input validation (amount, memo length, reference length, self-payment prevention)
+
+### Backend Features
+- RESTful API with Express.js (ES modules)
+- MongoDB with Mongoose ODM (8 models)
+- Centralized configuration with environment validation
+- Comprehensive error handling with consistent response format
+- Blockchain service layer (Stellar Horizon + Soroban RPC)
+- Event-driven architecture for on-chain event processing
+
+### Frontend Features
+- React 19 with Vite 8 build tooling
+- Dark/light theme with CSS variables and system preference detection
+- Responsive design (desktop, tablet, mobile)
+- Real authentication flow (login, register, session restore)
+- Protected and guest route handling
+- Loading skeletons, error states, and empty states for every page
+- QR code rendering with download (PNG) and copy (SVG) support
+- Transaction search, filter, sort, and pagination
+- Toast notifications and modal system
+- Wallet connection status display
+- Customer analytics cards on merchant dashboard
+
+---
 ## Project Links
 
 - **Live Demo:** [vercel](https://vercel.com/sudo7523-pixels-projects/paystream)
