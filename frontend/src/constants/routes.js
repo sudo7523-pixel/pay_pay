@@ -1,0 +1,17 @@
+export const ROUTES = {
+  HOME: '/',
+  ABOUT: '/about',
+  PRICING: '/pricing',
+  LOGIN: '/login',
+  REGISTER: '/register',
+  PAYMENT: '/pay/:merchantCode',
+  DASHBOARD: '/dashboard',
+  WALLET: '/wallet',
+  MERCHANT: '/merchant',
+  TRANSACTIONS: '/transactions',
+  PROFILE: '/profile',
+  QR: '/qr',
+  CUSTOMER_REGISTER: '/customer/register',
+  CUSTOMER_DASHBOARD: '/customer/dashboard',
+  NOT_FOUND: '*',
+}
