@@ -1,0 +1,337 @@
+.pay-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  background: var(--color-bg);
+}
+
+.pay-container {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.pay-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+.pay-brand-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+}
+
+.pay-brand-name {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+}
+
+.pay-heading {
+  text-align: center;
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+}
+
+/* Merchant Card */
+.pay-merchant-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.pay-merchant-logo {
+  flex-shrink: 0;
+}
+
+.pay-merchant-logo-img {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+.pay-merchant-logo-fallback {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+}
+
+.pay-merchant-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.pay-merchant-name {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--space-1);
+}
+
+.pay-merchant-category {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.pay-merchant-code {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  margin-top: var(--space-1);
+}
+
+.pay-merchant-expiry {
+  font-size: var(--text-xs);
+  color: var(--color-warning);
+  margin-top: var(--space-1);
+}
+
+/* Amount Card */
+.pay-amount-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.pay-currency-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.pay-currency-hint {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+/* Wallet Card */
+.pay-wallet-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.pay-section-title {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-secondary);
+}
+
+/* Actions */
+.pay-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.pay-cancel-btn {
+  color: var(--color-text-tertiary);
+}
+
+/* Loading */
+.pay-loading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.pay-skeleton-card {
+  height: 80px;
+  border-radius: var(--radius-md);
+  background: var(--skeleton);
+  animation: pay-shimmer 1.5s infinite;
+}
+
+.pay-skeleton-btn {
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--skeleton);
+  animation: pay-shimmer 1.5s infinite;
+}
+
+@keyframes pay-shimmer {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+/* Result screens */
+.pay-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.pay-result-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+}
+
+.pay-result--success .pay-result-icon {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.pay-result--failed .pay-result-icon {
+  background: var(--color-error-bg);
+  color: var(--color-error);
+}
+
+.pay-result--cancelled .pay-result-icon {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-tertiary);
+}
+
+.pay-result-icon--error,
+.pay-result-icon--cancelled {
+  /* reuse parent styles */
+}
+
+.pay-result-title {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+}
+
+.pay-result-message {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  max-width: 360px;
+}
+
+.pay-result-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.pay-failed-hash {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+}
+
+.pay-failed-hash-label {
+  color: var(--color-text-secondary);
+}
+
+/* Receipt */
+.pay-receipt {
+  width: 100%;
+  text-align: left;
+}
+
+.pay-receipt-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border-light);
+  gap: var(--space-4);
+}
+
+.pay-receipt-row:last-child {
+  border-bottom: none;
+}
+
+.pay-receipt-label {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.pay-receipt-value {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text);
+  text-align: right;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.pay-receipt-value--mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  word-break: break-all;
+}
+
+.pay-copy-btn {
+  background: none;
+  border: none;
+  color: var(--color-accent);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
+  white-space: nowrap;
+}
+
+.pay-copy-btn:hover {
+  background: var(--color-accent-light);
+}
+
+.pay-dashboard-link {
+  text-align: center;
+  margin-top: var(--space-2);
+}
+
+.pay-dashboard-link a {
+  color: var(--color-accent);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  font-weight: var(--weight-medium);
+}
+
+.pay-dashboard-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+  .pay-page {
+    padding: var(--space-4);
+    align-items: flex-start;
+    padding-top: var(--space-8);
+  }
+
+  .pay-container {
+    gap: var(--space-4);
+  }
+}

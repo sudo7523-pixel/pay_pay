@@ -1,0 +1,78 @@
+.page-profile {
+  max-width: 600px;
+}
+
+.profile-header {
+  margin-bottom: var(--space-6);
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.profile-avatar-section {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.profile-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+}
+
+.profile-name {
+  font-size: var(--text-xl);
+  margin-bottom: 2px;
+}
+
+.profile-email {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.profile-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-field-label {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.profile-field-value {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text);
+}
+
+.profile-field-value.mono {
+  font-family: var(--font-mono);
+}
+
+.profile-actions {
+  display: flex;
+  gap: var(--space-3);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border-light);
+}

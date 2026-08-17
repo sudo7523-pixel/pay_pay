@@ -1,0 +1,117 @@
+.page-transactions {
+  max-width: 900px;
+}
+
+.txns-header {
+  margin-bottom: var(--space-6);
+}
+
+.txns-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.txns-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.txns-table .txn-row {
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.txns-table .txn-row:hover {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-sm);
+}
+
+.txn-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.txn-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.txn-detail-row:last-child {
+  border-bottom: none;
+}
+
+.txn-detail-label {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.txn-detail-value {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text);
+  text-align: right;
+  max-width: 60%;
+  word-break: break-all;
+}
+
+.txn-detail-value--mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.txn-detail-value--hash {
+  font-size: var(--text-xs);
+  word-break: break-all;
+  max-width: 55%;
+}
+
+.txn-detail-right-group {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.txn-detail-divider {
+  height: 1px;
+  background: var(--color-border-light);
+  margin: var(--space-1) 0;
+}
+
+.txns-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.txn-middle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.txn-counterparty {
+  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+  color: var(--color-text-secondary);
+}
+
+.txn-id {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+@media (max-width: 768px) {
+  .txn-middle { display: none; }
+}
