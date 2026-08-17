@@ -1,0 +1,20 @@
+const LOG_LEVELS = { debug: 0, info: 1, warn: 2, error: 3 };
+
+const currentLevel = LOG_LEVELS[process.env.BLOCKCHAIN_LOG_LEVEL] ?? LOG_LEVELS.info;
+
+const ts = () => new Date().toISOString();
+
+export const blockchainLogger = {
+  debug: (...args) => {
+    if (currentLevel <= LOG_LEVELS.debug) console.log(`[${ts()}] [BLOCKCHAIN] [DEBUG]`, ...args);
+  },
+  info: (...args) => {
+    if (currentLevel <= LOG_LEVELS.info) console.log(`[${ts()}] [BLOCKCHAIN] [INFO]`, ...args);
+  },
+  warn: (...args) => {
+    if (currentLevel <= LOG_LEVELS.warn) console.warn(`[${ts()}] [BLOCKCHAIN] [WARN]`, ...args);
+  },
+  error: (...args) => {
+    if (currentLevel <= LOG_LEVELS.error) console.error(`[${ts()}] [BLOCKCHAIN] [ERROR]`, ...args);
+  },
+};
