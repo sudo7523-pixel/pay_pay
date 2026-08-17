@@ -1,0 +1,28 @@
+[package]
+name = "paystream"
+version = "0.1.0"
+edition = "2021"
+description = "Soroban smart contract for Level 3 submission"
+license = "MIT"
+homepage = "https://github.com/paystream"
+repository = "https://github.com/paystream"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+soroban-sdk = "21"
+
+[dev-dependencies]
+soroban-sdk = { version = "21", features = ["testutils"] }
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = "symbols"
+overflow-checks = true
+panic = "abort"
+
+[features]
+default = []
