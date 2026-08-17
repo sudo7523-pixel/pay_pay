@@ -112,6 +112,9 @@ cargo test
 ```
 
 ## Screenshots
+## Deployed Contract
+<img width="1911" height="861" alt="{DFDA9E87-77CC-498C-8FEC-02E2A019B7B0}" src="https://github.com/user-attachments/assets/ee5c61bf-74ea-481d-b48a-bb45e39f5b01" />
+
 ### Costumer dashboard:
 <img width="1920" height="1020" alt="Screenshot 2026-08-17 115458" src="https://github.com/user-attachments/assets/a31aec8f-ae59-42c8-b1c5-aace576185ed" />
 ### Merchant  dashboard:
