@@ -140,6 +140,25 @@ Coin-Pay-main/
 
 This project uses GitHub Actions for Continuous Integration. The pipeline automatically installs dependencies, builds the frontend and smart contract, and runs contract tests on every push and pull request to the `main` branch.
 
+### Pipeline Diagram
+
+```mermaid
+graph TD
+    A[Push / PR to main] --> B(GitHub Actions Workflow)
+    B --> C{Checkout Code}
+    
+    C --> D[Setup Node.js]
+    D --> E[Install Frontend Deps]
+    E --> F[Build Frontend]
+    
+    D --> G[Install Backend Deps]
+    
+    C --> H[Setup Rust Toolchain]
+    H --> I[Install Soroban CLI]
+    I --> J[Build Smart Contract]
+    J --> K[Test Smart Contract]
+```
+
 **`.github/workflows/ci.yml`**:
 
 ```yaml
