@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import * as payService from '../../services/payService'
 import * as sorobanService from '../../services/sorobanService'
 import * as freighterService from '../../services/freighterService'
-import { useFreighter } from '../../hooks'
+import { useFreighter, useContractQueries } from '../../hooks'
 import { useAuth } from '../../context/AuthContext'
 import { useBlockchain } from '../../context/BlockchainContext'
 import { useToast } from '../../context/ToastContext'
@@ -57,6 +57,9 @@ export default function Pay() {
   const [errorMessage, setErrorMessage] = useState(null)
   const [result, setResult] = useState(null)
   const pollingRef = useRef(false)
+  
+  const { queryPayment, checkPaymentExists } = useContractQueries()
+  const [onChainVerification, setOnChainVerification] = useState(null)
 
   useEffect(() => {
     if (authLoading) return
@@ -191,6 +194,17 @@ export default function Pay() {
       if (confirmation.confirmed) {
         setState(STATE.SUCCESS)
         toastSuccess('Payment confirmed on-chain')
+        
+        // Direct on-chain verification
+        try {
+          const exists = await checkPaymentExists(confirmation.transactionHash || submission.transactionId)
+          if (exists) {
+            const paymentDetails = await queryPayment(confirmation.transactionHash || submission.transactionId)
+            setOnChainVerification(paymentDetails)
+          }
+        } catch (e) {
+          console.error("Direct verification failed:", e)
+        }
       } else if (confirmation.status === 'FAILED' || confirmation.status === 'Failed') {
         setState(STATE.FAILED)
         setErrorMessage('Transaction failed on-chain')
@@ -392,6 +406,14 @@ export default function Pay() {
             <span className="pay-receipt-label">Status</span>
             <Badge variant="success">Confirmed On-Chain</Badge>
           </div>
+          {onChainVerification && (
+            <div className="pay-receipt-row">
+              <span className="pay-receipt-label">Direct Contract Query</span>
+              <span className="pay-receipt-value">
+                <Badge variant="info">Verified via Soroban RPC</Badge>
+              </span>
+            </div>
+          )}
           <div className="pay-receipt-row">
             <span className="pay-receipt-label">Time</span>
             <span className="pay-receipt-value">{formatFullDate(new Date().toISOString())}</span>

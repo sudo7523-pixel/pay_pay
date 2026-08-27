@@ -1,8 +1,8 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { useCustomer } from '../../hooks/useCustomer'
-import { useFreighter } from '../../hooks'
+import { useFreighter, useContractQueries } from '../../hooks'
 import * as payService from '../../services/payService'
 import Card from '../../components/Card/Card'
 import Button from '../../components/Button/Button'
@@ -31,6 +31,25 @@ export default function CustomerDashboard() {
     goToPage, setFilter, setSearch, setSortBy, refetch,
   } = useCustomer()
   const { publicKey, connected, connect } = useFreighter()
+  const {
+    config: contractConfig,
+    customerTotal: onChainCustomerTotal,
+    loading: contractLoading,
+    fetchConfig,
+    fetchCustomerTotal,
+    getInfo,
+  } = useContractQueries()
+
+  // Fetch on-chain data when wallet is connected
+  useEffect(() => {
+    fetchConfig()
+  }, [])
+
+  useEffect(() => {
+    if (connected && publicKey) {
+      fetchCustomerTotal(publicKey)
+    }
+  }, [connected, publicKey, fetchCustomerTotal])
 
   const [walletModalOpen, setWalletModalOpen] = useState(false)
   const [receiptModalOpen, setReceiptModalOpen] = useState(false)
@@ -263,6 +282,56 @@ export default function CustomerDashboard() {
               <WalletConnect />
             </div>
           )}
+        </div>
+      </Card>
+
+      {/* ── Blockchain Verification: Direct On-Chain Data ── */}
+      <Card variant="elevated" className="customer-blockchain-card">
+        <div className="customer-blockchain-header">
+          <h3 className="customer-blockchain-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '8px', verticalAlign: 'middle' }}>
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            Blockchain Verification
+          </h3>
+          <Badge variant="info">Direct Soroban RPC</Badge>
+        </div>
+        <p className="customer-blockchain-desc">
+          Data fetched directly from the deployed PayStream smart contract via Soroban RPC — no backend involved.
+        </p>
+        <div className="customer-blockchain-grid">
+          <div className="customer-blockchain-item">
+            <span className="customer-blockchain-label">Contract Status</span>
+            <span className="customer-blockchain-value">
+              {contractLoading ? '…' : contractConfig ? (
+                <Badge variant={contractConfig.paused ? 'warning' : 'success'}>
+                  {contractConfig.paused ? 'Paused' : 'Active'}
+                </Badge>
+              ) : '—'}
+            </span>
+          </div>
+          <div className="customer-blockchain-item">
+            <span className="customer-blockchain-label">Fee (basis points)</span>
+            <span className="customer-blockchain-value">
+              {contractLoading ? '…' : contractConfig?.fee_bps != null ? `${contractConfig.fee_bps} bps` : '—'}
+            </span>
+          </div>
+          <div className="customer-blockchain-item">
+            <span className="customer-blockchain-label">On-Chain Payments</span>
+            <span className="customer-blockchain-value">
+              {contractLoading ? '…' : connected && onChainCustomerTotal != null ? (
+                <>{onChainCustomerTotal.toString()} <Badge variant="success">Verified On-Chain</Badge></>
+              ) : (
+                <span style={{ opacity: 0.6 }}>Connect wallet to verify</span>
+              )}
+            </span>
+          </div>
+          <div className="customer-blockchain-item">
+            <span className="customer-blockchain-label">Contract ID</span>
+            <span className="customer-blockchain-value customer-blockchain-mono">
+              {shortenAddress(getInfo().contractId || '', 8)}
+            </span>
+          </div>
         </div>
       </Card>
 

@@ -58,6 +58,7 @@ Paystream is a non-custodial payment platform that enables users to send, receiv
 - Real authentication flow (login, register, session restore)
 - Protected and guest route handling
 - Loading skeletons, error states, and empty states for every page
+- **Direct Soroban Contract Integration**: Uses `@stellar/stellar-sdk` to query on-chain data directly via Soroban RPC, verifying payments and contract state on-chain.
 - QR code rendering with download (PNG) and copy (SVG) support
 - Transaction search, filter, sort, and pagination
 - Toast notifications and modal system

@@ -22,35 +22,40 @@
       "contract_function": "get_payment",
       "backend_function": "getPayment(paymentId)",
       "frontend_service": "getPayment(paymentId) → GET /soroban/payment/:id",
-      "frontend_hook_consumer": "useSoroban (polling & status check)",
+      "direct_frontend_client": "contractClient.directGetPayment(paymentId) → Soroban RPC",
+      "frontend_hook_consumer": "useSoroban (polling), useContractQueries.queryPayment",
       "purpose": "Retrieve payment details by ID"
     },
     {
       "contract_function": "payment_exists",
       "backend_function": "paymentExists(paymentId)",
       "frontend_service": "paymentExists(paymentId) → GET /soroban/payment/exists/:id",
-      "frontend_consumer": "Transaction verification flow",
+      "direct_frontend_client": "contractClient.directPaymentExists(paymentId) → Soroban RPC",
+      "frontend_consumer": "Transaction verification flow, useContractQueries.checkPaymentExists",
       "purpose": "Check if a payment record exists"
     },
     {
       "contract_function": "merchant_total",
       "backend_function": "merchantTotal(address)",
       "frontend_service": "getMerchantTotal(address) → GET /soroban/merchant-total/:address",
-      "frontend_hook_consumer": "useMerchant",
+      "direct_frontend_client": "contractClient.directMerchantTotal(address) → Soroban RPC",
+      "frontend_hook_consumer": "useMerchant, useContractQueries.fetchMerchantTotal",
       "purpose": "Get total payments received by merchant"
     },
     {
       "contract_function": "customer_total",
       "backend_function": "customerTotal(address)",
       "frontend_service": "getCustomerTotal(address) → GET /soroban/customer-total/:address",
-      "frontend_hook_consumer": "useCustomer",
+      "direct_frontend_client": "contractClient.directCustomerTotal(address) → Soroban RPC",
+      "frontend_hook_consumer": "useCustomer, useContractQueries.fetchCustomerTotal",
       "purpose": "Get total payments made by customer"
     },
     {
       "contract_function": "get_config",
       "backend_function": "getConfig()",
       "frontend_service": "getConfig() → GET /soroban/config",
-      "frontend_hook_consumer": "BlockchainContext / useSoroban",
+      "direct_frontend_client": "contractClient.directGetConfig() → Soroban RPC",
+      "frontend_hook_consumer": "BlockchainContext / useSoroban, useContractQueries.fetchConfig",
       "purpose": "Retrieve contract configuration"
     },
     {
